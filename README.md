@@ -6,6 +6,21 @@ DART 사업보고서에서 상장사 이사회 구성원을 자동으로 추출�
 
 ---
 
+## 웹 앱 (Claude Code 전용, 권장)
+
+`web/`은 회사·연도를 골라 이사회 구성원을 조회하는 로컬 웹 앱이다. 이사 명단 추출은 외부 LLM API 대신 **열려 있는 Claude Code 세션**이 맡는다.
+
+1. `web/.env.local`에 `DART_API_KEY=...`를 넣는다.
+2. 이 폴더에서 Claude Code를 열고 "보드트래커 시작"이라고 한다.
+3. Claude가 알려주는 `http://localhost:3000`에서 회사·연도를 골라 조회한다. 진행 상황은 Claude Code 터미널에 보인다.
+4. 끝나면 "보드트래커 종료".
+
+한 번 조회한 회사·연도는 `web/.runtime/cache.db`에 저장돼 다음부터 바로 나온다. 관리자 페이지(`/admin`)에서 캐시와 회사 목록을 관리한다.
+
+아래는 예전 Python CLI 설명이다.
+
+---
+
 ## 동작 방식
 
 1. `config.py`에 지정된 기업 목록과 연도 범위를 읽는다
@@ -21,6 +36,7 @@ DART 사업보고서에서 상장사 이사회 구성원을 자동으로 추출�
 ```
 01_board_tracker/
 ├── .env                    # DART_API_KEY 등 환경변수 (git 제외)
+├── web/                    # 로컬 웹 앱 (Claude Code 전용)
 ├── config.py               # 대상 기업 목록, 분석 연도 범위
 ├── main.py                 # OpenRouter(GPT-4.1) 기반 실행 진입점
 ├── main_local_llm.py       # 로컬 Ollama(exaone3.5) 기반 실행 진입점
