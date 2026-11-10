@@ -44,7 +44,6 @@ export default function DashboardPage() {
   const [startYear, setStartYear] = useState(2022);
   const [endYear, setEndYear] = useState(2025);
   const [loading, setLoading] = useState(true);
-  const [role, setRole] = useState<string | null>(null);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from(
@@ -58,11 +57,6 @@ export default function DashboardPage() {
       .then((data) => setCompanies(data.companies))
       .catch(() => {})
       .finally(() => setLoading(false));
-
-    fetch("/api/me")
-      .then((res) => res.json())
-      .then((data) => setRole(data.role))
-      .catch(() => {});
   }, []);
 
   const sortedCompanies = useMemo(
@@ -88,11 +82,6 @@ export default function DashboardPage() {
       }
       return next;
     });
-  }
-
-  async function handleLogout() {
-    await fetch("/api/auth", { method: "DELETE" });
-    router.push("/");
   }
 
   function handleSubmit() {
@@ -151,20 +140,12 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex gap-2">
-            {role === "admin" && (
-              <a
-                href="/admin"
-                className="px-4 py-2 text-[#8A8A9A] bg-white border border-[#ECECEC] rounded-xl hover:bg-[#F9F9FB] transition text-sm min-h-[44px] flex items-center"
-              >
-                관리자
-              </a>
-            )}
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-[#8A8A9A] bg-white border border-[#ECECEC] rounded-xl hover:bg-[#F9F9FB] transition text-sm min-h-[44px]"
+            <a
+              href="/admin"
+              className="px-4 py-2 text-[#8A8A9A] bg-white border border-[#ECECEC] rounded-xl hover:bg-[#F9F9FB] transition text-sm min-h-[44px] flex items-center"
             >
-              처음으로
-            </button>
+              관리자
+            </a>
           </div>
         </div>
 

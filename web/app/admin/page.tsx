@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 
 interface CompanyMap {
   [name: string]: string;
@@ -19,8 +18,6 @@ interface CacheEntry {
 type AdminTab = "companies" | "cache";
 
 export default function AdminPage() {
-  const router = useRouter();
-  const [authChecked, setAuthChecked] = useState(false);
   const [activeTab, setActiveTab] = useState<AdminTab>("companies");
 
   // Company management state
@@ -41,20 +38,6 @@ export default function AdminPage() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<
     "selected" | "all" | null
   >(null);
-
-  // Auth check on mount
-  useEffect(() => {
-    fetch("/api/me")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.role !== "admin") {
-          router.replace("/dashboard");
-        } else {
-          setAuthChecked(true);
-        }
-      })
-      .catch(() => router.replace("/"));
-  }, [router]);
 
   // Load companies on mount
   useEffect(() => {
@@ -228,13 +211,13 @@ export default function AdminPage() {
       return a.localeCompare(b, "ko");
     });
 
-  if (!authChecked || loading) {
+  if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center bg-[#F9F9FB]">
         <div className="text-center animate-pulse">
           <div className="w-8 h-8 border-2 border-[#4B6BFB] border-t-transparent rounded-full mx-auto mb-3 animate-spin" />
           <p className="text-[#8A8A9A] text-sm">
-            {!authChecked ? "권한 확인 중..." : "로딩 중..."}
+            로딩 중...
           </p>
         </div>
       </div>

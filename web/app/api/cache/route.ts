@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getSession } from "@/lib/auth";
 import {
   getCacheList,
   deleteCacheEntries,
@@ -8,11 +7,6 @@ import {
 } from "@/lib/db";
 
 export async function GET() {
-  const session = await getSession();
-  if (!session || session.role !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
   try {
     const caches = await getCacheList();
     return NextResponse.json({ caches });
@@ -26,11 +20,6 @@ export async function GET() {
 }
 
 export async function DELETE(request: NextRequest) {
-  const session = await getSession();
-  if (!session || session.role !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
   try {
     const body = await request.json();
     const { action, ids } = body;
