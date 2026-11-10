@@ -5,7 +5,9 @@
       "Read(//c/Users/SKTelecom/.claude/projects/**)",
       "Bash(npx tsc:*)",
       "Bash(taskkill //F //IM node.exe)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git -C /c/work/01_board_tracker/board-tracker-web remote -v)",
+      "Bash(git -C /c/work/01_board_tracker/board-tracker-web log --oneline -5)"
     ],
     "additionalDirectories": [
       "C:\\Users\\SKTelecom\\.claude\\projects\\c--work-01-board-tracker"
