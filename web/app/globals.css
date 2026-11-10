@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F9F9FB;
+  --foreground: #1A1A1A;
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --primary: #4B6BFB;
+  --primary-hover: #3A5AEA;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F0F2FF;
+  --secondary-foreground: #1A1A1A;
+  --muted: #F3F3F6;
+  --muted-foreground: #8A8A9A;
+  --accent: #EEF1FF;
+  --accent-foreground: #4B6BFB;
+  --border: #ECECEC;
+  --input-background: #F3F3F6;
+  --radius: 0.625rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --font-sans: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', 'Noto Sans KR', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+}
