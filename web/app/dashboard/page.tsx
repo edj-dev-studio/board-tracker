@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { recentYearRange } from "@/lib/years";
 
 interface CompanyMap {
   [name: string]: string;
@@ -41,8 +42,8 @@ export default function DashboardPage() {
   const [companies, setCompanies] = useState<CompanyMap>({});
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
-  const [startYear, setStartYear] = useState(2022);
-  const [endYear, setEndYear] = useState(2025);
+  const [startYear, setStartYear] = useState(() => recentYearRange().startYear);
+  const [endYear, setEndYear] = useState(() => recentYearRange().endYear);
   const [loading, setLoading] = useState(true);
 
   const currentYear = new Date().getFullYear();
